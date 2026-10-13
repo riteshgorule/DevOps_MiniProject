@@ -8,14 +8,6 @@ export default function AlertsAdvisory({ currentMode, selectedCity, onSelectCity
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
 
-  // Form state for creating new alert
-  const [formCity, setFormCity] = useState(selectedCity || 'Nagpur');
-  const [formSeverity, setFormSeverity] = useState('HIGH');
-  const [formAlert, setFormAlert] = useState('Elevated Heat Wave Alert');
-  const [formWarning, setFormWarning] = useState('Daytime surface temperature is expected to reach 44°C.');
-  const [isPosting, setIsPosting] = useState(false);
-  const [postSuccess, setPostSuccess] = useState(null);
-
   const fetchAlertsData = async (city) => {
     setLoading(true);
     setErrorMessage(null);
@@ -42,36 +34,6 @@ export default function AlertsAdvisory({ currentMode, selectedCity, onSelectCity
       setAlerts([]);
     } finally {
       setLoading(false);
-    }
-  };
-
-  const handleCreateAlert = async (e) => {
-    e.preventDefault();
-    setIsPosting(true);
-    setPostSuccess(null);
-    const endpoints = getEndpoints(currentMode);
-
-    try {
-      const res = await fetch(endpoints.alertsPost, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          city: formCity,
-          severity: formSeverity,
-          alert: formAlert,
-          warning: formWarning
-        }),
-        signal: AbortSignal.timeout(3500)
-      });
-
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const newAlert = await res.json();
-      setPostSuccess(`Incident bulletin #${newAlert.id} dispatched and persisted successfully.`);
-      fetchAlertsData(selectedCity);
-    } catch (err) {
-      alert(`Failed to dispatch alert: Alert Service (:5004) is offline or unreachable.`);
-    } finally {
-      setIsPosting(false);
     }
   };
 
@@ -201,142 +163,60 @@ export default function AlertsAdvisory({ currentMode, selectedCity, onSelectCity
         </div>
       </div>
 
-      {/* Content Split: Active Bulletins Feed vs Dark Card Emergency Dispatcher */}
-      <div className="content-split">
-        {/* Left Column: Active Bulletins Feed */}
-        <div>
-          <div className="section-subtitle">
-            Active Directives ({filteredAlerts.length})
-            {/* Severity Filter Pills */}
-            <div style={{ display: 'flex', gap: '6px' }}>
-              {['ALL', 'EXTREME', 'HIGH', 'MODERATE'].map(sev => (
-                <button
-                  key={sev}
-                  onClick={() => setFilterSeverity(sev)}
-                  className="pill-btn"
-                  style={{
-                    fontSize: '0.78rem',
-                    padding: '4px 12px',
-                    background: filterSeverity === sev ? 'var(--surface-dark)' : 'var(--bg-canvas)',
-                    color: filterSeverity === sev ? 'white' : 'var(--text-secondary)'
-                  }}
-                >
-                  {sev}
-                </button>
-              ))}
-            </div>
+      {/* Active Bulletins Feed */}
+      <div>
+        <div className="section-subtitle">
+          Active Directives ({filteredAlerts.length})
+          {/* Severity Filter Pills */}
+          <div style={{ display: 'flex', gap: '6px' }}>
+            {['ALL', 'EXTREME', 'HIGH', 'MODERATE'].map(sev => (
+              <button
+                key={sev}
+                onClick={() => setFilterSeverity(sev)}
+                className="pill-btn"
+                style={{
+                  fontSize: '0.78rem',
+                  padding: '4px 12px',
+                  background: filterSeverity === sev ? 'var(--surface-dark)' : 'var(--bg-canvas)',
+                  color: filterSeverity === sev ? 'white' : 'var(--text-secondary)'
+                }}
+              >
+                {sev}
+              </button>
+            ))}
           </div>
+        </div>
 
-          {filteredAlerts.length === 0 && !errorMessage ? (
-            <p style={{ color: 'var(--text-secondary)', padding: '16px' }}>No alerts matching the selected filter.</p>
-          ) : (
-            <div>
-              {filteredAlerts.map((item) => (
-                <div key={item.id} className={`clean-alert-card ${item.severity.toLowerCase()}`}>
-                  <div className="alert-top-row">
-                    <span className="alert-city-heading">
-                      📍 {item.city} &bull; {item.alert}
-                    </span>
-                    <span className={`severity-pill ${item.severity.toLowerCase()}`}>
-                      {item.severity}
-                    </span>
-                  </div>
-
-                  <p className="alert-warning-box">
-                    <strong>Warning Condition:</strong> {item.warning}
-                  </p>
-
-                  <div className="alert-directive-pill-box">
-                    <strong>Citizen Health Protocol:</strong> {item.advisory}
-                  </div>
-
-                  <div style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', marginTop: '8px' }}>
-                    Broadcast Stamp: {item.issuedAt} &bull; Lifecycle: {item.status} &bull; ID: #{item.id}
-                  </div>
+        {filteredAlerts.length === 0 && !errorMessage ? (
+          <p style={{ color: 'var(--text-secondary)', padding: '16px' }}>No alerts matching the selected filter.</p>
+        ) : (
+          <div>
+            {filteredAlerts.map((item) => (
+              <div key={item.id} className={`clean-alert-card ${item.severity.toLowerCase()}`}>
+                <div className="alert-top-row">
+                  <span className="alert-city-heading">
+                    📍 {item.city} &bull; {item.alert}
+                  </span>
+                  <span className={`severity-pill ${item.severity.toLowerCase()}`}>
+                    {item.severity}
+                  </span>
                 </div>
-              ))}
-            </div>
-          )}
-        </div>
 
-        {/* Right Column: Dark Card Emergency Dispatch Console */}
-        <div className="dark-card">
-          <h3>Emergency Dispatcher</h3>
-          <p>
-            Publish an operational heatwave advisory via REST API and persist state into <code>alerts.json</code> (:5004).
-          </p>
+                <p className="alert-warning-box">
+                  <strong>Warning Condition:</strong> {item.warning}
+                </p>
 
-          {postSuccess && (
-            <div className="alert-item" style={{ borderLeftColor: '#10b981', marginBottom: '16px' }}>
-              <div style={{ color: '#6ee7b7', fontWeight: 600 }}>✅ {postSuccess}</div>
-            </div>
-          )}
+                <div className="alert-directive-pill-box">
+                  <strong>Citizen Health Protocol:</strong> {item.advisory}
+                </div>
 
-          <form onSubmit={handleCreateAlert} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-            <div>
-              <label className="dark-label">Target Municipal Zone:</label>
-              <select 
-                id="input-alert-city"
-                className="dark-select"
-                value={formCity} 
-                onChange={(e) => setFormCity(e.target.value)}
-              >
-                {CITIES.map(c => (
-                  <option key={c} value={c}>{c}</option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <label className="dark-label">Threat Severity:</label>
-              <select 
-                id="input-alert-severity"
-                className="dark-select"
-                value={formSeverity} 
-                onChange={(e) => setFormSeverity(e.target.value)}
-              >
-                <option value="LOW">LOW</option>
-                <option value="MODERATE">MODERATE</option>
-                <option value="HIGH">HIGH</option>
-                <option value="EXTREME">EXTREME</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="dark-label">Bulletin Headline:</label>
-              <input 
-                id="input-alert-headline"
-                className="dark-input"
-                type="text" 
-                value={formAlert} 
-                onChange={(e) => setFormAlert(e.target.value)} 
-                required 
-              />
-            </div>
-
-            <div>
-              <label className="dark-label">Warning Details:</label>
-              <input 
-                id="input-alert-desc"
-                className="dark-input"
-                type="text" 
-                value={formWarning} 
-                onChange={(e) => setFormWarning(e.target.value)} 
-                required 
-              />
-            </div>
-
-            <button 
-              id="btn-broadcast-alert"
-              type="submit" 
-              className="pill-btn dark" 
-              disabled={isPosting} 
-              style={{ justifyContent: 'center', marginTop: '6px' }}
-            >
-              {isPosting ? 'Publishing...' : '📢 Publish Bulletin via REST API'}
-            </button>
-          </form>
-        </div>
+                <div style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', marginTop: '8px' }}>
+                  Broadcast Stamp: {item.issuedAt} &bull; Lifecycle: {item.status} &bull; ID: #{item.id}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

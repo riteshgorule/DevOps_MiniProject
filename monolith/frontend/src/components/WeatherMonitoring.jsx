@@ -171,126 +171,72 @@ export default function WeatherMonitoring({ currentMode, selectedCity, onSelectC
         </div>
       </div>
 
-      {/* Content Split: Monitored Station Registry vs Dark Card Inspector */}
-      <div className="content-split">
-        {/* Left Column: Station Registry List */}
-        <div>
-          <div className="section-subtitle">
-            Monitored Stations
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <input 
-                type="text" 
-                placeholder="Filter stations..." 
-                className="pill-input"
-                style={{ padding: '6px 14px', fontSize: '0.82rem', width: '160px' }}
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-              <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-                {filteredStations.length} Nodes
-              </span>
-            </div>
-          </div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr 1fr 1fr 0.8fr', padding: '0 16px 12px', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
-            <span>Station</span>
-            <span>Condition</span>
-            <span>Observed</span>
-            <span>Humidity</span>
-            <span>Select</span>
-          </div>
-
-          <div className="station-list">
-            {errorMessage ? (
-              <p style={{ color: 'var(--status-critical)' }}>Weather Telemetry Service is unreachable.</p>
-            ) : filteredStations.length === 0 ? (
-              <p style={{ color: 'var(--text-secondary)' }}>No telemetry stations matching search filter.</p>
-            ) : (
-              filteredStations.map((item) => (
-                <div 
-                  key={item.city} 
-                  className="station-row"
-                  style={{
-                    gridTemplateColumns: '1.2fr 1fr 1fr 1fr 0.8fr',
-                    background: item.city === selectedCity ? 'var(--pastel-blue)' : undefined
-                  }}
-                  onClick={() => onSelectCity(item.city)}
-                >
-                  <div className="station-name">
-                    <div className="station-name-icon">{item.city.charAt(0)}</div>
-                    <div>
-                      <div>{item.city}</div>
-                      <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', fontWeight: 400 }}>Ground Sensor</div>
-                    </div>
-                  </div>
-                  <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>{item.condition}</div>
-                  <div style={{ fontWeight: 600, color: item.temperature >= 40 ? 'var(--status-critical)' : 'var(--text-primary)' }}>
-                    {item.temperature}°C
-                  </div>
-                  <div style={{ fontSize: '0.9rem' }}>{item.humidity}% RH</div>
-                  <div>
-                    <button 
-                      className="pill-btn" 
-                      style={{ padding: '4px 10px', fontSize: '0.78rem' }}
-                      onClick={(e) => { e.stopPropagation(); onSelectCity(item.city); }}
-                    >
-                      Inspect
-                    </button>
-                  </div>
-                </div>
-              ))
-            )}
+      {/* Monitored Stations Registry */}
+      <div>
+        <div className="section-subtitle">
+          Monitored Stations
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <input 
+              type="text" 
+              placeholder="Filter stations..." 
+              className="pill-input"
+              style={{ padding: '6px 14px', fontSize: '0.82rem', width: '160px' }}
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+              {filteredStations.length} Nodes
+            </span>
           </div>
         </div>
 
-        {/* Right Column: Dark Card Inspector */}
-        <div className="dark-card">
-          <h3>Station Inspector</h3>
-          <p>Direct REST telemetry feed for municipal zone <strong>{selectedCity}</strong>.</p>
+        <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1.2fr 1fr 1fr 0.8fr', padding: '0 16px 12px', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+          <span>Station</span>
+          <span>Condition</span>
+          <span>Observed</span>
+          <span>Humidity</span>
+          <span>Action</span>
+        </div>
 
-          {cityData ? (
-            <div>
-              <div className="alert-item" style={{ borderLeftColor: '#38bdf8' }}>
-                <div className="alert-header">
-                  <span>Ground Sensor: {cityData.city}</span>
-                  <span style={{ fontSize: '0.75rem', padding: '2px 8px', background: 'rgba(56, 189, 248, 0.2)', borderRadius: '12px', color: '#7dd3fc' }}>
-                    PORT 5001
-                  </span>
-                </div>
-                <div className="alert-text">
-                  Observed: <strong>{cityData.temperature}°C</strong> &bull; Humidity: <strong>{cityData.humidity}%</strong> &bull; Atmosphere: <strong>{cityData.condition}</strong>
-                </div>
-              </div>
-
-              <div className="alert-item" style={{ borderLeftColor: '#a78bfa' }}>
-                <div className="alert-header">
-                  <span>Raw Telemetry Payload</span>
-                  <span style={{ fontSize: '0.72rem', color: '#a1a1aa', fontFamily: 'monospace' }}>application/json</span>
-                </div>
-                <pre style={{ 
-                  fontFamily: 'monospace', 
-                  fontSize: '0.78rem', 
-                  color: '#e2e8f0', 
-                  marginTop: '6px',
-                  background: 'rgba(0, 0, 0, 0.3)',
-                  padding: '10px',
-                  borderRadius: '8px',
-                  overflowX: 'auto'
-                }}>
-{JSON.stringify(cityData, null, 2)}
-                </pre>
-              </div>
-
-              <button 
-                className="pill-btn dark" 
-                style={{ marginTop: '12px', width: '100%', justifyContent: 'center' }}
-                onClick={() => fetchWeather(selectedCity)}
-              >
-                Sync {selectedCity} Sensor
-              </button>
-            </div>
+        <div className="station-list">
+          {errorMessage ? (
+            <p style={{ color: 'var(--status-critical)' }}>Weather Telemetry Service is unreachable.</p>
+          ) : filteredStations.length === 0 ? (
+            <p style={{ color: 'var(--text-secondary)' }}>No telemetry stations matching search filter.</p>
           ) : (
-            <p style={{ color: '#a1a1aa' }}>No telemetry data loaded for {selectedCity}.</p>
+            filteredStations.map((item) => (
+              <div 
+                key={item.city} 
+                className="station-row"
+                style={{
+                  gridTemplateColumns: '1.4fr 1.2fr 1fr 1fr 0.8fr',
+                  background: item.city === selectedCity ? 'var(--pastel-blue)' : undefined
+                }}
+                onClick={() => onSelectCity(item.city)}
+              >
+                <div className="station-name">
+                  <div className="station-name-icon">{item.city.charAt(0)}</div>
+                  <div>
+                    <div>{item.city}</div>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', fontWeight: 400 }}>Ground Sensor</div>
+                  </div>
+                </div>
+                <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>{item.condition}</div>
+                <div style={{ fontWeight: 600, color: item.temperature >= 40 ? 'var(--status-critical)' : 'var(--text-primary)' }}>
+                  {item.temperature}°C
+                </div>
+                <div style={{ fontSize: '0.9rem' }}>{item.humidity}% RH</div>
+                <div>
+                  <button 
+                    className="pill-btn" 
+                    style={{ padding: '4px 10px', fontSize: '0.78rem' }}
+                    onClick={(e) => { e.stopPropagation(); onSelectCity(item.city); }}
+                  >
+                    Select
+                  </button>
+                </div>
+              </div>
+            ))
           )}
         </div>
       </div>

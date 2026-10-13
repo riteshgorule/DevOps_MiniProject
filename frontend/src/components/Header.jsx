@@ -10,10 +10,7 @@ export default function Header({ activeTab, setActiveTab, currentMode, setCurren
           <div className="brand-section">
             <div className="brand-icon-box">🌡️</div>
             <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <h1 className="brand-title">ClimateIntel</h1>
-                <span className="brand-badge">DevOps Lab SaaS</span>
-              </div>
+              <h1 className="brand-title">ClimateIntel</h1>
               <p className="brand-subtitle">
                 Climate Intelligence for Heatwave Monitoring & Early Warning
               </p>
@@ -65,13 +62,6 @@ export default function Header({ activeTab, setActiveTab, currentMode, setCurren
           >
             <span>🚨</span> Incident Alerts
             <span className="nav-pill-badge">3</span>
-          </button>
-          <button
-            id="tab-architecture"
-            className={`nav-pill-btn ${activeTab === 'architecture' ? 'active' : ''}`}
-            onClick={() => setActiveTab('architecture')}
-          >
-            <span>📐</span> Architecture & Viva
           </button>
         </nav>
       </div>
