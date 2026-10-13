@@ -1,0 +1,37 @@
+[
+  {
+    "city": "Mumbai",
+    "temperature": 38,
+    "humidity": 62,
+    "condition": "Hot & Humid",
+    "lastUpdated": "2026-10-08 12:30 IST"
+  },
+  {
+    "city": "Pune",
+    "temperature": 37,
+    "humidity": 45,
+    "condition": "Sunny",
+    "lastUpdated": "2026-10-08 12:30 IST"
+  },
+  {
+    "city": "Nagpur",
+    "temperature": 45,
+    "humidity": 28,
+    "condition": "Extreme Heat",
+    "lastUpdated": "2026-10-08 12:30 IST"
+  },
+  {
+    "city": "Nashik",
+    "temperature": 34,
+    "humidity": 52,
+    "condition": "Moderate",
+    "lastUpdated": "2026-10-08 12:30 IST"
+  },
+  {
+    "city": "Aurangabad",
+    "temperature": 42,
+    "humidity": 34,
+    "condition": "Very Hot",
+    "lastUpdated": "2026-10-08 12:30 IST"
+  }
+]

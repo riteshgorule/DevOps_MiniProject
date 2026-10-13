@@ -1,0 +1,13 @@
+{
+  "name": "climate-prediction-service",
+  "version": "1.0.0",
+  "description": "Microservice 2: Heatwave Prediction Service (Port 5002)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  }
+}

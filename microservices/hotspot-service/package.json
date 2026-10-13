@@ -1,0 +1,13 @@
+{
+  "name": "climate-hotspot-service",
+  "version": "1.0.0",
+  "description": "Microservice 3: Hotspot Location Service (Port 5003)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  }
+}

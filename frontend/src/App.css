@@ -1,0 +1,89 @@
+/* App.css - Clean Supplementary Layout & Global Shell Styles */
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--bg-canvas);
+}
+
+.main-content {
+  flex: 1;
+  width: 100%;
+}
+
+/* Ensure no override on pastel metric cards */
+.metric-card {
+  padding: 24px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 160px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: none;
+}
+.metric-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+}
+
+/* Alert Card for Incident List */
+.clean-alert-card {
+  background: var(--bg-canvas);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  margin-bottom: 16px;
+  border-left: 4px solid var(--text-primary);
+  transition: transform 0.15s ease;
+}
+.clean-alert-card:hover {
+  transform: translateX(3px);
+}
+.clean-alert-card.extreme { border-left-color: var(--status-critical); }
+.clean-alert-card.high { border-left-color: #ea580c; }
+.clean-alert-card.moderate { border-left-color: #d97706; }
+.clean-alert-card.low { border-left-color: var(--status-positive); }
+
+.alert-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.alert-city-heading {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.alert-warning-box {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.alert-directive-pill-box {
+  background: white;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .header-shell, .status-bar-shell, .dashboard-container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .content-split {
+    grid-template-columns: 1fr;
+  }
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+}

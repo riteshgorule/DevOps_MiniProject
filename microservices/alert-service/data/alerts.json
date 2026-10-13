@@ -1,0 +1,62 @@
+[
+  {
+    "id": "ALT-1336",
+    "city": "Aurangabad",
+    "severity": "HIGH",
+    "status": "ACTIVE",
+    "alert": "Elevated Heat Wave Alert",
+    "warning": "Daytime surface temperature is expected to reach 44°C.",
+    "advisory": "High heat conditions expected. Stay hydrated and avoid prolonged outdoor exposure between 12:00 PM and 3:00 PM.",
+    "issuedAt": "9:07:41 pm IST"
+  },
+  {
+    "id": "ALT-101",
+    "city": "Nagpur",
+    "severity": "EXTREME",
+    "status": "ACTIVE",
+    "alert": "Extreme Heat Red Alert",
+    "warning": "Dangerous heatwave conditions with temperature crossing 45°C. Severe dehydration risk.",
+    "advisory": "Extreme heat conditions detected. Avoid unnecessary outdoor activity, stay hydrated, keep vulnerable individuals indoors, and take immediate cooling precautions.",
+    "issuedAt": "2026-10-08 11:30 IST"
+  },
+  {
+    "id": "ALT-102",
+    "city": "Aurangabad",
+    "severity": "HIGH",
+    "status": "ACTIVE",
+    "alert": "Severe Heatwave Orange Alert",
+    "warning": "High heat conditions expected with temperatures exceeding 42°C.",
+    "advisory": "High heat conditions expected. Stay hydrated and avoid prolonged outdoor exposure between 12:00 PM and 3:00 PM.",
+    "issuedAt": "2026-10-08 11:00 IST"
+  },
+  {
+    "id": "ALT-103",
+    "city": "Mumbai",
+    "severity": "MODERATE",
+    "status": "ACTIVE",
+    "alert": "Moderate Heat Yellow Advisory",
+    "warning": "High humidity combined with 38°C creates high heat index (real-feel 42°C).",
+    "advisory": "Warm weather conditions. Keep hydrated, carry drinking water, and protect yourself from direct sun exposure during peak afternoon hours.",
+    "issuedAt": "2026-10-08 10:15 IST"
+  },
+  {
+    "id": "ALT-104",
+    "city": "Pune",
+    "severity": "MODERATE",
+    "status": "INACTIVE",
+    "alert": "Moderate Temperature Watch",
+    "warning": "Dry warm conditions throughout midday.",
+    "advisory": "Stay hydrated during outdoor commutes.",
+    "issuedAt": "2026-10-07 14:00 IST"
+  },
+  {
+    "id": "ALT-105",
+    "city": "Nashik",
+    "severity": "LOW",
+    "status": "INACTIVE",
+    "alert": "Normal Seasonal Advisory",
+    "warning": "Temperatures within normal seasonal bounds.",
+    "advisory": "No heatwave warning. Routine hydration recommended.",
+    "issuedAt": "2026-10-07 09:00 IST"
+  }
+]

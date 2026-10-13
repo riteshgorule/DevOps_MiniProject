@@ -1,0 +1,13 @@
+{
+  "name": "climate-intelligence-3tier",
+  "version": "1.0.0",
+  "description": "3-Tier Backend for Climate Intelligence Heatwave Monitoring",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  }
+}

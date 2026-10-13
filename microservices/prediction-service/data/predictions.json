@@ -1,0 +1,47 @@
+[
+  {
+    "city": "Mumbai",
+    "temperature": 38,
+    "predictedTemperature": 39.2,
+    "heatwave": false,
+    "severity": "MODERATE",
+    "riskScore": 58,
+    "calculatedAt": "2026-10-08 12:30 IST"
+  },
+  {
+    "city": "Pune",
+    "temperature": 37,
+    "predictedTemperature": 38.0,
+    "heatwave": false,
+    "severity": "MODERATE",
+    "riskScore": 54,
+    "calculatedAt": "2026-10-08 12:30 IST"
+  },
+  {
+    "city": "Nagpur",
+    "temperature": 45,
+    "predictedTemperature": 46.5,
+    "heatwave": true,
+    "severity": "EXTREME",
+    "riskScore": 96,
+    "calculatedAt": "2026-10-08 12:30 IST"
+  },
+  {
+    "city": "Nashik",
+    "temperature": 34,
+    "predictedTemperature": 34.8,
+    "heatwave": false,
+    "severity": "LOW",
+    "riskScore": 28,
+    "calculatedAt": "2026-10-08 12:30 IST"
+  },
+  {
+    "city": "Aurangabad",
+    "temperature": 42,
+    "predictedTemperature": 43.1,
+    "heatwave": true,
+    "severity": "HIGH",
+    "riskScore": 84,
+    "calculatedAt": "2026-10-08 12:30 IST"
+  }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "city": "Nagpur",
+    "latitude": 21.1458,
+    "longitude": 79.0882,
+    "temperature": 45,
+    "severity": "EXTREME",
+    "status": "Critical Hotspot",
+    "region": "Vidarbha"
+  },
+  {
+    "city": "Aurangabad",
+    "latitude": 19.8762,
+    "longitude": 75.3433,
+    "temperature": 42,
+    "severity": "HIGH",
+    "status": "Severe Hotspot",
+    "region": "Marathwada"
+  },
+  {
+    "city": "Mumbai",
+    "latitude": 19.0760,
+    "longitude": 72.8777,
+    "temperature": 38,
+    "severity": "MODERATE",
+    "status": "Monitoring",
+    "region": "Konkan"
+  },
+  {
+    "city": "Pune",
+    "latitude": 18.5204,
+    "longitude": 73.8567,
+    "temperature": 37,
+    "severity": "MODERATE",
+    "status": "Monitoring",
+    "region": "Western Maharashtra"
+  },
+  {
+    "city": "Nashik",
+    "latitude": 19.9975,
+    "longitude": 73.7898,
+    "temperature": 34,
+    "severity": "LOW",
+    "status": "Normal",
+    "region": "North Maharashtra"
+  }
+]
